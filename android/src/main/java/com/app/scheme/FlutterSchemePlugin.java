@@ -131,8 +131,16 @@ public class FlutterSchemePlugin implements FlutterPlugin, MethodChannel.MethodC
       dataMap.put("host",schemeUri.getHost());
       dataMap.put("port",schemeUri.getPort());
       if(path == null) {
-        dataMap.put("path",schemeUri.getPath().replaceFirst("/root",""));
-        dataMap.put("dataString",intent.getDataString().replaceFirst("/root",""));
+        String uriPath = schemeUri.getPath();
+        if(uriPath.startsWith("/root")) {
+          uriPath = uriPath.replaceFirst("/root","");
+        }
+        String dataString = intent.getDataString();
+        if(dataString.startsWith("/root")) {
+          dataString = dataString.replaceFirst("/root", "");
+        }
+        dataMap.put("path", uriPath);
+        dataMap.put("dataString",dataString);
       } else {
         dataMap.put("path",path);
         dataMap.put("dataString",path);
