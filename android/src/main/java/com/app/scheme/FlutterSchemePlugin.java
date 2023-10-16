@@ -102,7 +102,7 @@ public class FlutterSchemePlugin implements FlutterPlugin, MethodChannel.MethodC
 
   private void handleIntent(Context context, Intent intent) {
     String action = intent.getAction();
-    if (Intent.ACTION_VIEW.equals(action)) {
+    if (Intent.ACTION_VIEW.equals(action) || Intent.ACTION_SEND.equals(action)) {
       Uri schemeUri = intent.getData();
       if(schemeUri == null){
         return;
